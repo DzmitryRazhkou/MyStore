@@ -1,26 +1,18 @@
 package com.mystore.qa.pages;
 
-import com.mystore.qa.utils.TestUtil;
+import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 
-public class SearchPage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class SearchPage extends BasePage {
 
     public SearchPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
 //    VALIDATE BREADCRUMB:
@@ -70,7 +62,7 @@ public class SearchPage {
         List<WebElement> productList = driver.findElements(getProductLocator);
         for (WebElement s : productList) {
             if (s.getText().trim().contains(productName) && s.isDisplayed()) {
-                System.out.println("Product list contains: " +s.getText().trim());
+                System.out.println("Product list contains: " + s.getText().trim());
                 return true;
             }
         }
@@ -79,23 +71,26 @@ public class SearchPage {
 
 //    MORE BUTTON:
 
-    private WebElement getProduct(){
+    private WebElement getProduct() {
         By getProductLocator = By.cssSelector("div.product-container");
         wait.until(ExpectedConditions.presenceOfElementLocated(getProductLocator));
         return driver.findElement(getProductLocator);
     }
 
-    public FadedShortSleeveTShirtsPage_Deprecated clickOnMore(){
+    public void doClickOnProduct() throws InterruptedException {
         getProduct().click();
-        return new FadedShortSleeveTShirtsPage_Deprecated(driver);
+        Thread.sleep(2000);
     }
 
-    /**
-     * This element should be placed on the faded short sleeve shirts page
-     * @return
-     */
+
 
 //    ADD TO CART (FROM FADED SHORT SLEEVE SHIRT):
+//    SWITCH TO FRAME: iframe#fancybox-frame1657871366289
+    private WebElement getIFrame() {
+        By iframeLocator = By.cssSelector("iframe[class='fancybox-iframe']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(iframeLocator));
+        return driver.findElement(iframeLocator);
+    }
 
     private WebElement getQuantity() {
         By quantityLocator = By.cssSelector("input#quantity_wanted");
@@ -130,31 +125,49 @@ public class SearchPage {
         return driver.findElement(colorLocator);
     }
 
-    public void getAddToCartBtn() {
-        By addToCartBtnLocator = By.cssSelector("p#add_to_cart");
-        WebElement addToCart = driver.findElement(addToCartBtnLocator);
-        Actions act = new Actions(driver);
-        act.moveToElement(addToCart).click().build().perform();
-
-        By cartLayerLocator = By.cssSelector("div#layer_cart");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
+    private WebElement getAddToCartButton() {
+        By addToCartLocator = By.cssSelector("button[class='exclusive']");
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartLocator));
+        return driver.findElement(addToCartLocator);
     }
 
     public boolean getSuccessMessageSearchPage() {
-        By successMessageLocator = By.xpath("//div[@class='layer_cart_product col-xs-12 col-md-6']/h2");
+        By successMessageLocator = By.cssSelector("div[class='layer_cart_product col-xs-12 col-md-6'] h2");
         wait.until(ExpectedConditions.presenceOfElementLocated(successMessageLocator));
         WebElement successMessage = driver.findElement(successMessageLocator);
         System.out.println("Success message: " + successMessage.getText());
         return successMessage.isDisplayed();
     }
 
-    public void doAddToCart(String quantity, String index) {
+    public void doAddToCart(String quantity, String index) throws InterruptedException {
+        driver.switchTo().frame(getIFrame());
         getQuantity().clear();
         getQuantity().sendKeys(quantity);
         getPlusBtn().click();
         getMinusBtn().click();
         getSize(index);
         getColor().click();
-        getAddToCartBtn();
+        getAddToCartButton().click();
+        Thread.sleep(3500);
+
+//        By cartLayerLocator = By.cssSelector("div#layer_cart");
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
+    }
+
+    private WebElement getProceedToCheckOutBtn() {
+        By proceedToCheckOutBtnLocator = By.cssSelector("a[title='Proceed to checkout']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(proceedToCheckOutBtnLocator));
+        return driver.findElement(proceedToCheckOutBtnLocator);
+    }
+
+    public OrderPage proceedToOrderPage() {
+        boolean flag = false;
+        if (getSuccessMessageSearchPage() != flag) {
+            getProceedToCheckOutBtn().click();
+            return new OrderPage(driver);
+        } else {
+            System.out.println("Product has not added to your shopping cart");
+        }
+        return null;
     }
 }

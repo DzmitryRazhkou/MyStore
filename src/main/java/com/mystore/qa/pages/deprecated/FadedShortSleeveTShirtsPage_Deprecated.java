@@ -1,5 +1,6 @@
-package com.mystore.qa.pages;
+package com.mystore.qa.pages.deprecated;
 
+import com.mystore.qa.pages.OrderPage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -221,7 +222,7 @@ public class FadedShortSleeveTShirtsPage_Deprecated {
     }
 
     public boolean getSuccessMessage() {
-        By successMessageLocator = By.xpath("//div[@class='layer_cart_product col-xs-12 col-md-6']/h2");
+        By successMessageLocator = By.cssSelector("div[class='layer_cart_product col-xs-12 col-md-6'] h2");
         wait.until(ExpectedConditions.presenceOfElementLocated(successMessageLocator));
         WebElement successMessage = driver.findElement(successMessageLocator);
         System.out.println("Success message: " + successMessage.getText());
@@ -244,7 +245,7 @@ public class FadedShortSleeveTShirtsPage_Deprecated {
 //        return false;
 //    }
 
-    private WebElement getProceedToCheckOutBtn() {
+    public WebElement getProceedToCheckOutBtn() {
         By proceedToCheckOutBtnLocator = By.cssSelector("a[title='Proceed to checkout']");
         wait.until(ExpectedConditions.presenceOfElementLocated(proceedToCheckOutBtnLocator));
         return driver.findElement(proceedToCheckOutBtnLocator);

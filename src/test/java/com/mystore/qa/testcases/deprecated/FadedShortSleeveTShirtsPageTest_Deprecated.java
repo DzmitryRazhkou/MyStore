@@ -1,8 +1,9 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.deprecated;
 
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.deprecated.FadedShortSleeveTShirtsPage_Deprecated;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,7 +54,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         Assert.assertTrue(fadedShortSleeveTShirtsPage.getFadedShortSleeveTShirtBreadCrumb());
     }
 
@@ -65,7 +66,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
 
         String actFadedShortSleeveTShirtPageTitle = fadedShortSleeveTShirtsPage.getFadedShortSleeveTShirtPageTitle();
         String expFadedShortSleeveTShirtPageTitle = prop.getProperty("fadedShortSleeveTShirtsTitlePage");
@@ -83,7 +84,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doWriteReview(title, comment);
         Assert.assertTrue(fadedShortSleeveTShirtsPage.newReviewComment());
     }
@@ -99,7 +100,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doSendEmailFriend(name, email);
         Assert.assertTrue(fadedShortSleeveTShirtsPage.newEmailComment());
     }
@@ -112,7 +113,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.getAddToWishBtn();
         Assert.assertTrue(fadedShortSleeveTShirtsPage.newAddToWish());
     }
@@ -127,7 +128,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         Assert.assertTrue(fadedShortSleeveTShirtsPage.getSuccessMessage());
 

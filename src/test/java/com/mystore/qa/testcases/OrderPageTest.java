@@ -3,6 +3,7 @@ package com.mystore.qa.testcases;
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.deprecated.FadedShortSleeveTShirtsPage_Deprecated;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,7 +56,7 @@ public class OrderPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
         Assert.assertTrue(orderPage.getYourShoppingCartBreadCrumb());
@@ -71,7 +72,7 @@ public class OrderPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
 
@@ -90,7 +91,7 @@ public class OrderPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
         Assert.assertEquals(orderPage.price(), orderPage.getTotal());
@@ -109,7 +110,7 @@ public class OrderPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+//        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
         orderPage.proceedFinally(deliveryInstruction, index);

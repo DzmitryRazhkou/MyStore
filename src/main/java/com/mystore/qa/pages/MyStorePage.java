@@ -1,26 +1,18 @@
 package com.mystore.qa.pages;
 
+import com.mystore.qa.basepage.BasePage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.DressesPage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.TShirtsPage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
-import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MyStorePage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
-
+public class MyStorePage extends BasePage {
     public MyStorePage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
 //  Header Section:

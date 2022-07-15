@@ -1,7 +1,8 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.deprecated;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.deprecated.AddToCartJoinedPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -82,7 +83,7 @@ public class AddToCartJoinedPageTest {
     }
 
     @Test
-    public void doAddToCartSearchTest() {
+    public void doAddToCartSearchTest() throws InterruptedException {
         String productType = prop.getProperty("productType");
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
@@ -91,7 +92,7 @@ public class AddToCartJoinedPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        searchPage.clickOnMore();
+//        searchPage.clickOnMore();
         searchPage.doAddToCart(quantity, size);
         Assert.assertTrue(searchPage.getSuccessMessageSearchPage());
     }
