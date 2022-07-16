@@ -1,26 +1,18 @@
 package com.mystore.qa.pages;
 
-import com.mystore.qa.utils.TestUtil;
+import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class MyCreditSlipsPage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
-
+public class MyCreditSlipsPage extends BasePage {
     public MyCreditSlipsPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
-    //    VALIDATE BREADCRUMB:
+//    VALIDATE BREADCRUMB:
 
     private WebElement getMyCreditSlips() {
         By myCreditSlipsLocator = By.cssSelector("span.navigation_page");
@@ -81,12 +73,4 @@ public class MyCreditSlipsPage {
         getHome().click();
         return new MyStorePage(driver);
     }
-
-
-
-
-
-
-
-
 }

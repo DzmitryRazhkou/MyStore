@@ -1,30 +1,22 @@
 package com.mystore.qa.pages;
 
-import com.mystore.qa.utils.TestUtil;
+import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class IdentityPage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
-
+public class IdentityPage extends BasePage {
     public IdentityPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
-    //    VALIDATE BREADCRUMB:
+//    VALIDATE BREADCRUMB:
 
     private WebElement getIdentity() {
         By identityLocator = By.cssSelector("span.navigation_page");

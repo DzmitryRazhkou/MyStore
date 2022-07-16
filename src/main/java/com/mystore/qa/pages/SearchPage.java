@@ -1,10 +1,7 @@
 package com.mystore.qa.pages;
 
 import com.mystore.qa.basepage.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import java.util.List;
@@ -79,7 +76,6 @@ public class SearchPage extends BasePage {
 
     public void doClickOnProduct() throws InterruptedException {
         getProduct().click();
-        Thread.sleep(2000);
     }
 
 
@@ -148,10 +144,15 @@ public class SearchPage extends BasePage {
         getSize(index);
         getColor().click();
         getAddToCartButton().click();
-        Thread.sleep(3500);
-
+//        Thread.sleep(1000000);
+    }
 //        By cartLayerLocator = By.cssSelector("div#layer_cart");
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
+
+    public void proceedCO(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement co = driver.findElement(By.cssSelector("a[title='Proceed to checkout']"));
+        js.executeScript("arguments[0].click()", co);
     }
 
     private WebElement getProceedToCheckOutBtn() {

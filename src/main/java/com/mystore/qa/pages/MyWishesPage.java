@@ -1,5 +1,6 @@
 package com.mystore.qa.pages;
 
+import com.mystore.qa.basepage.BasePage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,14 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MyWishesPage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
-
+public class MyWishesPage extends BasePage {
     public MyWishesPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
 //    VALIDATE BREADCRUMB:

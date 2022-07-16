@@ -1,21 +1,13 @@
 package com.mystore.qa.pages;
 
-import com.mystore.qa.utils.TestUtil;
+import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class StoresPage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
-
+public class StoresPage extends BasePage {
     public StoresPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
 //    VALIDATE BREADCRUMB:
