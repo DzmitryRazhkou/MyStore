@@ -71,12 +71,16 @@ public class MyStorePage extends BasePage {
 //    CLICK ON THE BUTTON:
 
     public ContactUsPage clickContactUs() {
+        log.info("User clicks on the contact us button");
         getContactUsButton().click();
+        log.info("User navigates on the contact us page");
         return new ContactUsPage(driver);
     }
 
     public LoginPage clickSignIn() {
+        log.info("User clicks on the sign in button");
         getSignInButton().click();
+        log.info("User navigates on the login page");
         return new LoginPage(driver);
     }
 
@@ -117,7 +121,9 @@ public class MyStorePage extends BasePage {
     }
 
     public WomenPage clickOnWomen(){
+        log.info("User clicks on the women section");
         womenButton().click();
+        log.info("User navigates on the women page");
         return new WomenPage(driver);
     }
 
@@ -130,7 +136,9 @@ public class MyStorePage extends BasePage {
     }
 
     public DressesPage clickOnDresses(){
+        log.info("User clicks on the dresses section");
         dressesButton().click();
+        log.info("User navigates on the dresses page");
         return new DressesPage(driver);
     }
 
@@ -143,7 +151,9 @@ public class MyStorePage extends BasePage {
     }
 
     public TShirtsPage clickOnTShirts(){
+        log.info("User clicks on the t-shirt section");
         t_shirtsButton().click();
+        log.info("User navigates on the t-shirt page");
         return new TShirtsPage(driver);
     }
 
