@@ -53,8 +53,11 @@ public class MyAccountPage extends BasePage {
     }
 
     public SearchPage doSearch(String productType){
+        log.info("User enters product type on the search field");
         getSearchField().sendKeys(productType);
+        log.info("User clicks on the search button");
         getSearchBtn().click();
+        log.info("User navigates at the my search page");
         return new SearchPage(driver);
     }
 
@@ -82,7 +85,9 @@ public class MyAccountPage extends BasePage {
     }
 
     public MyCreditSlipsPage clickOnMyCreditSlips(){
+        log.info("User clicks on the my credit slips link");
         getMyCreditSlipsLink().click();
+        log.info("User navigates at the my credit slips page");
         return new MyCreditSlipsPage(driver);
     }
 
@@ -95,7 +100,9 @@ public class MyAccountPage extends BasePage {
     }
 
     public MyAddressesPage clickOnMyAddresses(){
+        log.info("User clicks on the my address link");
         getMyAddressesLink().click();
+        log.info("User navigates at the my address page");
         return new MyAddressesPage(driver);
     }
 
@@ -108,7 +115,9 @@ public class MyAccountPage extends BasePage {
     }
 
     public IdentityPage clickOnIdentity(){
+        log.info("User clicks on the my identity link");
         getIdentityLink().click();
+        log.info("User navigates at the my identity page");
         return new IdentityPage(driver);
     }
 
@@ -121,7 +130,9 @@ public class MyAccountPage extends BasePage {
     }
 
     public MyWishesPage clickOnMyWishes(){
+        log.info("User clicks on the my wishes link");
         getMyWishesLink().click();
+        log.info("User navigates at the my wishes page");
         return new MyWishesPage(driver);
     }
 
@@ -134,12 +145,9 @@ public class MyAccountPage extends BasePage {
     }
 
     public MyStorePage doClickHome(){
+        log.info("User clicks on the my home");
         getHome().click();
+        log.info("User navigates at the my store page");
         return new MyStorePage(driver);
     }
-
-
-
-
-
 }

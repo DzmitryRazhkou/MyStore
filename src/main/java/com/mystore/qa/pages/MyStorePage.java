@@ -343,6 +343,7 @@ public class MyStorePage extends BasePage {
 
         WebElement element = driver.findElement(By.cssSelector("[title^='Manage my customer account']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        log.info("Scroll down to element");
         js.executeScript("arguments[0].scrollIntoView()", element);
 
         String getMyOrdersText = getMyOrders().getText().trim();
@@ -409,6 +410,7 @@ public class MyStorePage extends BasePage {
 
         WebElement element = driver.findElement(By.cssSelector("#block_various_links_footer"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        log.info("Scroll down to element");
         js.executeScript("arguments[0].scrollIntoView()", element);
 
         String getSpecialsText = getSpecials().getText().trim();
@@ -450,6 +452,7 @@ public class MyStorePage extends BasePage {
 
         WebElement element = driver.findElement(By.cssSelector("#block_contact_infos"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        log.info("Scroll down to element");
         js.executeScript("arguments[0].scrollIntoView()", element);
 
         String getGeoLocationTrimmedText = getGeoLocation().getText().replaceAll("\n", " ").trim();

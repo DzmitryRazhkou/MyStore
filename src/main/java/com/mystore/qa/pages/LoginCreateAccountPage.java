@@ -32,13 +32,6 @@ public class LoginCreateAccountPage extends BasePage {
         }
     }
 
-//    VALIDATE PAGE TITLE:
-
-    public String getMyLoginCreateAccountPageTitle(){
-        System.out.println(" =====> My login create account page title is: " +driver.getTitle()+ " <===== ");
-        return driver.getTitle();
-    }
-
 //    YOUR PERSONAL INFORMATION:
 
 //    1. Title:
@@ -233,26 +226,45 @@ public class LoginCreateAccountPage extends BasePage {
     String dayDOB, String monthDOB, String yearDOB, String company, String addressFL, String addressSL,
                                    String city, String state, long zipCode, String addInfo, long phone) {
 
+        log.info("User selects Mr & Mrs");
         getMrMrsRadioBtn().click();
+        log.info("User enters first name");
         getFirstName().sendKeys(firstName);
+        log.info("User enters last name");
         getLastName().sendKeys(lastName);
+        log.info("User enters password");
         getPassword().sendKeys(password);
 
+        log.info("User enters day of the birth");
         selectDays(dayDOB);
+        log.info("User enters month of the birth");
         selectMonths(monthDOB);
+        log.info("User enters year of the birth");
         selectYears(yearDOB);
 
+        log.info("User enters first name for address");
         getFirstNameAddress().sendKeys(firstName);
+        log.info("User enters last name for address");
         getLastNameAddress().sendKeys(lastName);
+        log.info("User enters company name");
         getCompany().sendKeys(company);
+        log.info("User enters first line address");
         getAddressFirstLine().sendKeys(addressFL);
+        log.info("User enters second line address");
         getAddressSecondLine().sendKeys(addressSL);
+        log.info("User enters city");
         getCity().sendKeys(city);
+        log.info("User enters state");
         selectStates(state);
+        log.info("User enters zip code");
         getZipCode().sendKeys(String.valueOf(zipCode));
+        log.info("User enters additional information");
         getAddInfo().sendKeys(addInfo);
+        log.info("User enters phone number");
         getMobilePhone().sendKeys(String.valueOf(phone));
+        log.info("User clicks on the register button");
         getRegisterBtn().click();
+        log.info("User navigates at the my account page");
         return new MyAccountPage(driver);
     }
 

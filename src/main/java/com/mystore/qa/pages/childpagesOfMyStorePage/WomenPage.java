@@ -73,8 +73,8 @@ public class WomenPage extends BasePage {
 
     public String extractResultString() {
         List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
-        for (int i = 0; i < list.size(); i++) {
-            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+        for (WebElement webElement : list) {
+            String extTemp = webElement.getText().replaceAll("\n", " ");
             System.out.println("Initial: " + extTemp);
             return extTemp;
         }
@@ -104,6 +104,7 @@ public class WomenPage extends BasePage {
     private void moveLeftSlider() {
 
 //        Position of slider:
+        log.info("User gets location of the web elements");
         Point point = leftSlider().getLocation();
         int x_axis = point.getX();
         int y_axis = point.getY();
@@ -116,6 +117,7 @@ public class WomenPage extends BasePage {
     private void moveRightSlider() {
 
 //        Position of slider:
+        log.info("User gets location of the web elements");
         Point point = rightSlider().getLocation();
         int x_axis = point.getX();
         int y_axis = point.getY();
@@ -126,9 +128,13 @@ public class WomenPage extends BasePage {
     }
 
     public void moveSlider() throws InterruptedException {
+        log.warn("User navigates to an element");
         navigateToSlider();
+        log.warn("User moves a slider to the left");
         moveLeftSlider();
+        log.warn("User moves a slider to the right");
         moveRightSlider();
+        log.warn("Waiting for...");
         Thread.sleep(2000);
     }
 
@@ -155,8 +161,8 @@ public class WomenPage extends BasePage {
     public String extractSortString() {
 
         List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
-        for (int i = 0; i < list.size(); i++) {
-            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+        for (WebElement webElement : list) {
+            String extTemp = webElement.getText().replaceAll("\n", " ");
             System.out.println("Initial: " + extTemp);
             return extTemp;
         }

@@ -53,10 +53,14 @@ public class DressesPage extends BasePage {
 //    METHOD:
 
     public void doSorting() throws InterruptedException {
+        log.info("User clicks at the category check box");
         getCategoryCheckbox().click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#uniform-layered_id_attribute_group_3")));
+        log.info("User clicks at the size check box");
         getSizeCheckbox().click();
+        log.info("User clicks at the color check box");
         getColorCheckbox().click();
+        log.warn("Waiting for");
         Thread.sleep(15000);
     }
 
@@ -72,8 +76,8 @@ public class DressesPage extends BasePage {
 
     public String extractResultString() {
         List<WebElement> list = driver.findElements(By.cssSelector("div.product-container"));
-        for (int i = 0; i < list.size(); i++) {
-            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+        for (WebElement webElement : list) {
+            String extTemp = webElement.getText().replaceAll("\n", " ");
             System.out.println("Initial: " + extTemp);
             return extTemp;
         }
@@ -104,6 +108,7 @@ public class DressesPage extends BasePage {
 
 //        Position of slider:
 
+        log.info("User gets location of the web elements");
         Point point = leftSlider().getLocation();
         int x_axis = point.getX();
         int y_axis = point.getY();
@@ -116,7 +121,7 @@ public class DressesPage extends BasePage {
     public void moveRightSlider() {
 
 //        Position of slider:
-
+        log.info("User gets location of the web elements");
         Point point = rightSlider().getLocation();
         int x_axis = point.getX();
         int y_axis = point.getY();
@@ -127,9 +132,13 @@ public class DressesPage extends BasePage {
     }
 
     public void moveSlider() throws InterruptedException {
+        log.warn("User navigates to an element");
         navigateToSlider();
+        log.warn("User moves a slider to the left");
         moveLeftSlider();
+        log.warn("User moves a slider to the right");
         moveRightSlider();
+        log.warn("Waiting for...");
         Thread.sleep(2000);
     }
 
@@ -150,14 +159,15 @@ public class DressesPage extends BasePage {
     public void selectSort() throws InterruptedException {
         Select select = new Select(getSortBy());
         select.selectByIndex(2);
+        log.warn("User selects a sorting button");
         Thread.sleep(3500);
     }
 
     public String extractSortString() {
 
         List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
-        for (int i = 0; i < list.size(); i++) {
-            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+        for (WebElement webElement : list) {
+            String extTemp = webElement.getText().replaceAll("\n", " ");
             System.out.println("Initial: " + extTemp);
             return extTemp;
         }

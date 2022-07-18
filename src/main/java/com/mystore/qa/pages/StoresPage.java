@@ -94,7 +94,7 @@ public class StoresPage extends BasePage {
         return driver.findElement(zoomOutLocator);
     }
 
-    public void zoomInZoomOutTest() throws InterruptedException {
+    public void zoomInZoomOutTest() {
         navigate();
         doAcceptOk().click();
         getZoomIn().click();
@@ -146,11 +146,15 @@ public class StoresPage extends BasePage {
     }
 
 
-    public void doSelectLocation(String cityName, String value) throws InterruptedException {
+    public void doSelectLocation(String cityName, String value) {
+        log.info("User clicks on the navigate button");
         navigate();
+        log.info("User enters a city name");
         locationInput().clear();
         locationInput().sendKeys(cityName);
+        log.info("User enters range of the miles");
         selectMiles(value);
+        log.info("User clicks a search button");
         getSearchBtn().click();
     }
 }

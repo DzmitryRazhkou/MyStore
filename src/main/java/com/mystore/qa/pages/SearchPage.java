@@ -4,7 +4,10 @@ import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class SearchPage extends BasePage {
 
@@ -125,6 +128,21 @@ public class SearchPage extends BasePage {
         By addToCartLocator = By.cssSelector("button[class='exclusive']");
         wait.until(ExpectedConditions.elementToBeClickable(addToCartLocator));
         return driver.findElement(addToCartLocator);
+    }
+
+    public String doTransferFacebook() {
+//        wait.until(ExpectedConditions.visibilityOf(facebook));
+//        Action_Driver_Perform.click(driver, facebook);
+        Set<String> pages = driver.getWindowHandles();
+        Iterator<String> it = pages.iterator();
+        String parentWindowId = it.next();
+        String childWindowId = it.next();
+        if (!parentWindowId.equalsIgnoreCase(childWindowId)) {
+            driver.switchTo().window(childWindowId);
+        }
+//        wait.until(ExpectedConditions.elementToBeClickable(login_Locator));
+        String expectedPage_Facebook = driver.getTitle();
+        return expectedPage_Facebook;
     }
 
     public boolean getSuccessMessageSearchPage() {

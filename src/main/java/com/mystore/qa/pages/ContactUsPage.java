@@ -14,11 +14,11 @@ public class ContactUsPage extends BasePage {
 
 //    RETURN HOME:
 
-    private WebElement getReturnHomeButton(){
-        By returnHomeButtonLocator = By.cssSelector(".home");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(returnHomeButtonLocator));
-        return driver.findElement(returnHomeButtonLocator);
-    }
+//    private WebElement getReturnHomeButton(){
+//        By returnHomeButtonLocator = By.cssSelector(".home");
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(returnHomeButtonLocator));
+//        return driver.findElement(returnHomeButtonLocator);
+//    }
 
 //    CONTACT
 

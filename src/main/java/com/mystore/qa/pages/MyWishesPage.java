@@ -1,15 +1,12 @@
 package com.mystore.qa.pages;
 
 import com.mystore.qa.basepage.BasePage;
-import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class MyWishesPage extends BasePage {
     public MyWishesPage(WebDriver driver) {
@@ -56,6 +53,7 @@ public class MyWishesPage extends BasePage {
                 return null;
             }
         }
+        log.info("User received list of the top sellers product");
         return topSellersListText;
     }
 
@@ -70,6 +68,7 @@ public class MyWishesPage extends BasePage {
             if (topSellersRows.isDisplayed()) {
                 topSellersListText.add(topSellersRows.getText().replaceAll("\\s+", " "));
                 if (topSellersListText.contains(result)) {
+                    log.info("Top seller list contains a product");
                     return true;
                 }
             }
@@ -79,24 +78,24 @@ public class MyWishesPage extends BasePage {
 
 //    WISH LISTS:
 
-    public boolean validateExistingWishList(String existResult) {
-        By existingWishListLocator = By.cssSelector("#wishlist_45435>td");
-        wait.until(ExpectedConditions.presenceOfElementLocated(existingWishListLocator));
-
-        List<WebElement> existingWishList = driver.findElements(existingWishListLocator);
-        List<String> existingWishText = new ArrayList<>();
-
-        for (WebElement row : existingWishList) {
-            if (row.isDisplayed()) {
-                existingWishText.add(row.getText().trim());
-                if (existingWishText.contains(existResult)) {
-                    System.out.println("The existing wish list contains: " + existResult);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean validateExistingWishList(String existResult) {
+//        By existingWishListLocator = By.cssSelector("#wishlist_45435>td");
+//        wait.until(ExpectedConditions.presenceOfElementLocated(existingWishListLocator));
+//
+//        List<WebElement> existingWishList = driver.findElements(existingWishListLocator);
+//        List<String> existingWishText = new ArrayList<>();
+//
+//        for (WebElement row : existingWishList) {
+//            if (row.isDisplayed()) {
+//                existingWishText.add(row.getText().trim());
+//                if (existingWishText.contains(existResult)) {
+//                    System.out.println("The existing wish list contains: " + existResult);
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
 
 //    CREATE NEW WISH LIST:
@@ -130,9 +129,10 @@ public class MyWishesPage extends BasePage {
     }
 
     public String getId(String wishListName) {
-        String wishListId = createNewWishList(wishListName).getAttribute("id").split("_")[1];
+        String wishListId = Objects.requireNonNull(createNewWishList(wishListName)).getAttribute("id").split("_")[1];
         System.out.println("The name of wish list is: " + wishListName);
         System.out.println("The wish list ID is: " + wishListId);
+        log.info("Id is returned");
         return wishListId;
     }
 
@@ -160,6 +160,7 @@ public class MyWishesPage extends BasePage {
         List<WebElement> listOfWishlist = driver.findElements(wishListLocator);
 
         if (listOfWishlist.size() > 0) {
+            log.info("User clicks on the delete button");
             getDeleteBtn().click();
             Alert okDelete = driver.switchTo().alert();
             String textAlert = okDelete.getText();
@@ -181,7 +182,9 @@ public class MyWishesPage extends BasePage {
     }
 
     public MyAccountPage doClickBackToToYourAccount() {
+        log.info("User clicks on the back to your account button");
         getBackToYourAccount().click();
+        log.info("User navigates at the my account page");
         return new MyAccountPage(driver);
     }
 
@@ -194,7 +197,9 @@ public class MyWishesPage extends BasePage {
     }
 
     public MyStorePage doClickHome() {
+        log.info("User clicks on the home button");
         getHome().click();
+        log.info("User navigates at the my store page");
         return new MyStorePage(driver);
     }
 
@@ -207,7 +212,9 @@ public class MyWishesPage extends BasePage {
     }
 
     public StoresPage doClickOurStores() {
+        log.info("User clicks on the stores button");
         getOurStores().click();
+        log.info("User navigates at the stores page");
         return new StoresPage(driver);
     }
 

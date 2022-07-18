@@ -116,6 +116,7 @@ public class IdentityPage extends BasePage {
         for (String s: personalData) {
             System.out.println(s);
         }
+        log.info("User receives personal information");
         return personalData;
     }
 
@@ -128,7 +129,9 @@ public class IdentityPage extends BasePage {
     }
 
     public MyAccountPage doClickBackToToYourAccount(){
+        log.info("User clicks on the back to your account");
         getBackToYourAccount().click();
+        log.info("User navigates at the my account page");
         return new MyAccountPage(driver);
     }
 
@@ -141,7 +144,9 @@ public class IdentityPage extends BasePage {
     }
 
     public MyStorePage doClickHome(){
+        log.info("User clicks on the home button");
         getHome().click();
+        log.info("User navigates at the my store page");
         return new MyStorePage(driver);
     }
 }

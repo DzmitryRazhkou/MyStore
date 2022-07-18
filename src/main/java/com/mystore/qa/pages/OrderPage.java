@@ -129,5 +129,4 @@ public class OrderPage extends BasePage {
         getProceedToCheckOutShipping().click();
     }
 
-
 }

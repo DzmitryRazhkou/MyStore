@@ -87,11 +87,15 @@ public class LoginPage extends BasePage {
     }
 
     public MyAccountPage doLogin(String email, String password) {
+        log.info("User enters email address");
         getEmail().clear();
         getEmail().sendKeys(email);
+        log.info("User enters password");
         getPassword().clear();
         getPassword().sendKeys(password);
+        log.info("User clicks on the sign in button");
         getSignIn().click();
+        log.info("User navigates at the my account page");
         return new MyAccountPage(driver);
     }
 
@@ -124,9 +128,12 @@ public class LoginPage extends BasePage {
     }
 
     public LoginCreateAccountPage doCreateAccount(String emailCreateAccount) {
+        log.info("User enters new email address for creating a new account");
         getEmailCreateAccount().clear();
         getEmailCreateAccount().sendKeys(emailCreateAccount);
+        log.info("User clicks on the create new account button");
         getCreateAccountBtn().click();
+        log.info("User navigates at the my login create account page");
         return new LoginCreateAccountPage(driver);
     }
 }

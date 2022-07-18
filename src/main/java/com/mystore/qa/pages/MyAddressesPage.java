@@ -3,7 +3,6 @@ package com.mystore.qa.pages;
 import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyAddressesPage extends BasePage {
@@ -39,22 +38,22 @@ public class MyAddressesPage extends BasePage {
 
 //    EXTRACT EXISTING DATA:
 
-    public List<String> getExistingData() {
-        By myAddressLocator = By.xpath("//ul[@class='last_item item box']/li");
-        wait.until(ExpectedConditions.presenceOfElementLocated(myAddressLocator));
-
-        List<WebElement> myAddressList = driver.findElements(myAddressLocator);
-        List<String> myAddressesTextList = new ArrayList<>();
-
-        for (WebElement existDataRow : myAddressList) {
-            if (existDataRow.isDisplayed()) {
-                myAddressesTextList.add(existDataRow.getText());
-            } else {
-                return null;
-            }
-        }
-        return myAddressesTextList;
-    }
+//    public List<String> getExistingData() {
+//        By myAddressLocator = By.xpath("//ul[@class='last_item item box']/li");
+//        wait.until(ExpectedConditions.presenceOfElementLocated(myAddressLocator));
+//
+//        List<WebElement> myAddressList = driver.findElements(myAddressLocator);
+//        List<String> myAddressesTextList = new ArrayList<>();
+//
+//        for (WebElement existDataRow : myAddressList) {
+//            if (existDataRow.isDisplayed()) {
+//                myAddressesTextList.add(existDataRow.getText());
+//            } else {
+//                return null;
+//            }
+//        }
+//        return myAddressesTextList;
+//    }
 
 //    UPDATE:
 
@@ -95,17 +94,24 @@ public class MyAddressesPage extends BasePage {
     }
 
     public void doUpdate(String addressFl, String addressSl, String phone, String addInfo, String alias) {
+        log.info("User clicks on the update address button");
         getUpdateButton().click();
+        log.info("User clicks on the update first address line");
         getAddressFl().clear();
         getAddressFl().sendKeys(addressFl);
+        log.info("User clicks on the update second address line");
         getAddressSl().clear();
         getAddressSl().sendKeys(addressSl);
+        log.info("User clicks on the update phone number");
         getPhone().clear();
         getPhone().sendKeys(phone);
+        log.info("User clicks on the update additional information");
         getAdditionalInfo().clear();
         getAdditionalInfo().sendKeys(addInfo);
+        log.info("User clicks on the update alias");
         getAlias().clear();
         getAlias().sendKeys(alias);
+        log.info("User clicks on the save button");
         getSaveBtn().click();
     }
 
@@ -152,16 +158,26 @@ public class MyAddressesPage extends BasePage {
     public void doAddNewAddress(String addAddressFl, String addAddressSl, String addCity, String addState, String addZip,
                                 String addPhone, String addAddInfo, String alias) {
 
+        log.info("User clicks on the new address button");
         getAddANewAddressButton().click();
+        log.info("User enters a new first address line");
         getAddressFl().sendKeys(addAddressFl);
+        log.info("User enters a new second address line");
         getAddressSl().sendKeys(addAddressSl);
+        log.info("User enters a new city");
         getCity().sendKeys(addCity);
+        log.info("User enters a new state");
         selectStates(addState);
+        log.info("User enters a new zip code");
         getZipCode().sendKeys(addZip);
+        log.info("User enters a new phone number");
         getPhone().sendKeys(addPhone);
+        log.info("User enters a new additional information");
         getAdditionalInfo().sendKeys(addAddInfo);
+        log.info("User enters a new alias");
         getAlias().clear();
         getAlias().sendKeys(alias);
+        log.info("User clicks on the save button");
         getSaveBtn().click();
     }
 
@@ -174,6 +190,7 @@ public class MyAddressesPage extends BasePage {
     }
 
     public void getAlert() {
+        log.info("User clicks on the delete button");
         getDeleteBtn().click();
         Alert okDelete = driver.switchTo().alert();
         String textAlert = okDelete.getText();
@@ -190,7 +207,9 @@ public class MyAddressesPage extends BasePage {
     }
 
     public MyAccountPage doClickBackToToYourAccount() {
+        log.info("User clicks on the back to your account button");
         getBackToYourAccount().click();
+        log.info("User navigates at the my account page");
         return new MyAccountPage(driver);
     }
 
@@ -203,7 +222,9 @@ public class MyAddressesPage extends BasePage {
     }
 
     public MyStorePage doClickHome() {
+        log.info("User clicks on the home button");
         getHome().click();
+        log.info("User navigates at the my store page");
         return new MyStorePage(driver);
     }
 }

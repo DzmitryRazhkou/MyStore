@@ -96,7 +96,9 @@ public class OrderHistoryPage extends BasePage {
     }
 
     public MyAccountPage doClickBackToToYourAccount() {
+        log.info("User clicks on the back to your account button");
         getBackToYourAccount().click();
+        log.info("User navigates at the my account page");
         return new MyAccountPage(driver);
     }
 
@@ -109,7 +111,9 @@ public class OrderHistoryPage extends BasePage {
     }
 
     public MyStorePage doClickHome() {
+        log.info("User clicks on the home button");
         getHome().click();
+        log.info("User navigates at the my store page");
         return new MyStorePage(driver);
     }
 }
