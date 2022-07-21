@@ -136,11 +136,25 @@ public class SearchPage extends BasePage {
         return successMessage.isDisplayed();
     }
 
-    private void tryCatchCustomWait(){
+    private void tryCatchCustomWait() {
         try {
             wait.until(ExpectedConditions.attributeToBe((getAddToCartButton()), "class", "exclusive added"));
-        } catch (TimeoutException y){
+        } catch (TimeoutException y) {
             System.out.println(" =====> CW <===== ");
+        }
+    }
+
+    private void customWait() {
+        By addToCartChangedStateLocator = By.cssSelector("button[class='exclusive added']");
+        for (int i = 0; i < 100; i++) {
+            try {
+                driver.findElement(addToCartChangedStateLocator);
+            } catch (NoSuchElementException yy) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ignored) {
+                }
+            }
         }
     }
 
@@ -158,7 +172,7 @@ public class SearchPage extends BasePage {
         getColor().click();
         log.info("User clicks on the add to cart button");
         getAddToCartButton().click();
-        tryCatchCustomWait();
+        customWait();
         log.warn("User goes backyard to the page");
         driver.switchTo().defaultContent();
     }
@@ -170,7 +184,7 @@ public class SearchPage extends BasePage {
     }
 
     public OrderPage proceedToOrderPage() {
-        getProceedToCheckOutBtn();
+        getProceedToCheckOutBtn().click();
         return new OrderPage(driver);
     }
 }

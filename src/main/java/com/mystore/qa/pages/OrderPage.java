@@ -44,25 +44,23 @@ public class OrderPage extends BasePage {
     private double getTotalPrice() {
         By totalPriceLocator = By.cssSelector("tr td#total_product");
         wait.until(ExpectedConditions.presenceOfElementLocated(totalPriceLocator));
-        String totalPriceTr = driver.findElement(totalPriceLocator).getText().replaceAll("[^a-zA-Z0-9]", "");
-        double totalPrice = (Double.parseDouble(totalPriceTr))/100;
-        return totalPrice;
+        String totalPriceTr = driver.findElement(totalPriceLocator).getText().replaceAll("[^a-zA-Z\\d]", "");
+        return (Double.parseDouble(totalPriceTr))/100;
     }
 
     private double getTotalShipping() {
         By totalShippingLocator = By.cssSelector("tr td#total_shipping");
         wait.until(ExpectedConditions.presenceOfElementLocated(totalShippingLocator));
         String totalShippingText = driver.findElement(totalShippingLocator).getText();
-        String totalShippingTr = totalShippingText.replaceAll("[^a-zA-Z0-9]", "");
-        double totalShipping = (Double.parseDouble(totalShippingTr))/100;
-        return totalShipping;
+        String totalShippingTr = totalShippingText.replaceAll("[^a-zA-Z\\d]", "");
+        return (Double.parseDouble(totalShippingTr))/100;
     }
 
     public double getTotal() {
         By totalLocator = By.cssSelector("span#total_price");
         wait.until(ExpectedConditions.presenceOfElementLocated(totalLocator));
         String totalText = driver.findElement(totalLocator).getText();
-        String totalTr = totalText.replaceAll("[^a-zA-Z0-9]", "");
+        String totalTr = totalText.replaceAll("[^a-zA-Z\\d]", "");
         double total = (Double.parseDouble(totalTr))/100;
         System.out.println(" =====> Expected total price: " + total + "$ <=====");
         return total;
@@ -108,8 +106,8 @@ public class OrderPage extends BasePage {
 //    SHIPPING:
 
     private WebElement getCheckBox() {
-        By checkBoxLocator = By.id("cgv");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(checkBoxLocator));
+        By checkBoxLocator = By.cssSelector("div.checker");
+        wait.until(ExpectedConditions.elementToBeClickable(checkBoxLocator));
         return driver.findElement(checkBoxLocator);
     }
 
@@ -119,7 +117,14 @@ public class OrderPage extends BasePage {
         return driver.findElement(proceedToCheckOutShippingLocator);
     }
 
-    public void proceedFinally(String deliveryInstruction, int index){
+    private WebElement getPaymentMethod() {
+        By getPaymentMethodLocator = By.cssSelector("a.cheque");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getPaymentMethodLocator));
+        return driver.findElement(getPaymentMethodLocator);
+    }
+
+
+    public void proceedThruOrderPage(String deliveryInstruction, int index) {
         getProceedToCheckOutSummary().click();
         selectDeliveryAddress(index);
         getTextArea().clear();
@@ -129,4 +134,8 @@ public class OrderPage extends BasePage {
         getProceedToCheckOutShipping().click();
     }
 
+    public MyStorePaymentPage selectPaymentMethod(){
+        getPaymentMethod().click();
+        return new MyStorePaymentPage(driver);
+    }
 }

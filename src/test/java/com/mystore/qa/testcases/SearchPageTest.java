@@ -49,7 +49,7 @@ public class SearchPageTest extends BaseTest {
     }
 
     @Test
-    public void doAddToCart() throws InterruptedException {
+    public void doAddToCart() {
         String productType = prop.getProperty("productType");
 
         String quantity = prop.getProperty("quantity");
