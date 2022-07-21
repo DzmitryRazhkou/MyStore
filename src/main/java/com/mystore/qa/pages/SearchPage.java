@@ -5,9 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class SearchPage extends BasePage {
 
@@ -77,14 +75,14 @@ public class SearchPage extends BasePage {
         return driver.findElement(getProductLocator);
     }
 
-    public void doClickOnProduct() throws InterruptedException {
+    public void doClickOnProduct() {
+        log.info("User clicks on the product to proceed further");
         getProduct().click();
     }
 
 
-
 //    ADD TO CART (FROM FADED SHORT SLEEVE SHIRT):
-//    SWITCH TO FRAME: iframe#fancybox-frame1657871366289
+
     private WebElement getIFrame() {
         By iframeLocator = By.cssSelector("iframe[class='fancybox-iframe']");
         wait.until(ExpectedConditions.presenceOfElementLocated(iframeLocator));
@@ -125,24 +123,9 @@ public class SearchPage extends BasePage {
     }
 
     private WebElement getAddToCartButton() {
-        By addToCartLocator = By.cssSelector("button[class='exclusive']");
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartLocator));
+        By addToCartLocator = By.cssSelector("button[name='Submit']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartLocator));
         return driver.findElement(addToCartLocator);
-    }
-
-    public String doTransferFacebook() {
-//        wait.until(ExpectedConditions.visibilityOf(facebook));
-//        Action_Driver_Perform.click(driver, facebook);
-        Set<String> pages = driver.getWindowHandles();
-        Iterator<String> it = pages.iterator();
-        String parentWindowId = it.next();
-        String childWindowId = it.next();
-        if (!parentWindowId.equalsIgnoreCase(childWindowId)) {
-            driver.switchTo().window(childWindowId);
-        }
-//        wait.until(ExpectedConditions.elementToBeClickable(login_Locator));
-        String expectedPage_Facebook = driver.getTitle();
-        return expectedPage_Facebook;
     }
 
     public boolean getSuccessMessageSearchPage() {
@@ -153,40 +136,41 @@ public class SearchPage extends BasePage {
         return successMessage.isDisplayed();
     }
 
-    public void doAddToCart(String quantity, String index) throws InterruptedException {
+    private void tryCatchCustomWait(){
+        try {
+            wait.until(ExpectedConditions.attributeToBe((getAddToCartButton()), "class", "exclusive added"));
+        } catch (TimeoutException y){
+            System.out.println(" =====> CW <===== ");
+        }
+    }
+
+    public void doAddToCart(String quantity, String index) {
+        log.info("User switches to the frame");
         driver.switchTo().frame(getIFrame());
+        log.info("User selects quantity of the product");
         getQuantity().clear();
         getQuantity().sendKeys(quantity);
         getPlusBtn().click();
         getMinusBtn().click();
+        log.info("User selects size of the product from the drop down menu");
         getSize(index);
+        log.info("User selects color of the product");
         getColor().click();
+        log.info("User clicks on the add to cart button");
         getAddToCartButton().click();
-//        Thread.sleep(1000000);
-    }
-//        By cartLayerLocator = By.cssSelector("div#layer_cart");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
-
-    public void proceedCO(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement co = driver.findElement(By.cssSelector("a[title='Proceed to checkout']"));
-        js.executeScript("arguments[0].click()", co);
+        tryCatchCustomWait();
+        log.warn("User goes backyard to the page");
+        driver.switchTo().defaultContent();
     }
 
     private WebElement getProceedToCheckOutBtn() {
-        By proceedToCheckOutBtnLocator = By.cssSelector("a[title='Proceed to checkout']");
+        By proceedToCheckOutBtnLocator = By.cssSelector("div[class='layer_cart_cart col-xs-12 col-md-6'] div a");
         wait.until(ExpectedConditions.presenceOfElementLocated(proceedToCheckOutBtnLocator));
         return driver.findElement(proceedToCheckOutBtnLocator);
     }
 
     public OrderPage proceedToOrderPage() {
-        boolean flag = false;
-        if (getSuccessMessageSearchPage() != flag) {
-            getProceedToCheckOutBtn().click();
-            return new OrderPage(driver);
-        } else {
-            System.out.println("Product has not added to your shopping cart");
-        }
-        return null;
+        getProceedToCheckOutBtn();
+        return new OrderPage(driver);
     }
 }

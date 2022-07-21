@@ -61,9 +61,8 @@ public class SearchPageTest extends BaseTest {
         searchPage = myAccountPage.doSearch(productType);
         searchPage.doClickOnProduct();
         searchPage.doAddToCart(quantity, size);
-        searchPage.proceedCO();
-//        Assert.assertTrue(searchPage.getSuccessMessageSearchPage());
-//        orderPage = searchPage.proceedToOrderPage();
-//        Assert.assertTrue(orderPage.getYourShoppingCartBreadCrumb());
+        Assert.assertTrue(searchPage.getSuccessMessageSearchPage());
+        orderPage = searchPage.proceedToOrderPage();
+        Assert.assertTrue(orderPage.getYourShoppingCartBreadCrumb());
     }
 }
