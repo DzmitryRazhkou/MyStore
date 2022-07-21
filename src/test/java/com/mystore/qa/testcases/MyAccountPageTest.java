@@ -1,7 +1,6 @@
 package com.mystore.qa.testcases;
 
 import com.mystore.qa.basetest.BaseTest;
-import com.mystore.qa.pages.LoginCreateAccountPage;
 import com.mystore.qa.pages.LoginPage;
 import com.mystore.qa.pages.MyAccountPage;
 import com.mystore.qa.pages.MyStorePage;
@@ -12,7 +11,6 @@ public class MyAccountPageTest extends BaseTest {
     MyStorePage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
-    LoginCreateAccountPage loginCreateAccountPage;
 
     @Test
     public void validateMyAccountBreadcrumbTest() {

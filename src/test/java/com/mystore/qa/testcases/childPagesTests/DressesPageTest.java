@@ -3,14 +3,12 @@ package com.mystore.qa.testcases.childPagesTests;
 import com.mystore.qa.basetest.BaseTest;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.DressesPage;
-import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DressesPageTest extends BaseTest {
     MyStorePage myStorePage;
     DressesPage dressesPage;
-    WomenPage womenPage;
 
     @Test
     public void validateDressesBreadcrumbTest() {

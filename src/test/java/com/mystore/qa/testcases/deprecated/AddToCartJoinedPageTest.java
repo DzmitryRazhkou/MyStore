@@ -2,10 +2,8 @@ package com.mystore.qa.testcases.deprecated;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
-import com.mystore.qa.pages.deprecated.AddToCartJoinedPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,20 +18,17 @@ public class AddToCartJoinedPageTest {
     Properties prop;
 
     private static WebDriver driver;
-    private static WebDriverWait wait;
 
     MyStorePage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
-    OrderHistoryPage orderHistoryPage;
     SearchPage searchPage;
-    AddToCartJoinedPage addToCartJoinedPage;
 
     @BeforeMethod
     public void startUp() {
         cp = new ConfigReader();
         df = new DriverFactory();
-        prop = cp.initProp();
+        prop = ConfigReader.initProp();
         driver = df.initDriver("chrome", prop);
     }
 
@@ -83,7 +78,7 @@ public class AddToCartJoinedPageTest {
     }
 
     @Test
-    public void doAddToCartSearchTest() throws InterruptedException {
+    public void doAddToCartSearchTest() {
         String productType = prop.getProperty("productType");
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");

@@ -1,8 +1,6 @@
 package com.mystore.qa.testcases.childPagesTests;
 
 import com.mystore.qa.basetest.BaseTest;
-import com.mystore.qa.pages.ContactUsPage;
-import com.mystore.qa.pages.LoginPage;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import org.testng.Assert;
@@ -13,8 +11,6 @@ public class WomenPageTest extends BaseTest{
 
     MyStorePage myStorePage;
     WomenPage womenPage;
-    ContactUsPage contactUsPage;
-    LoginPage loginPage;
 
     @Test
     public void validateWomenBreadcrumbTest() {

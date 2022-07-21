@@ -3,7 +3,6 @@ package com.mystore.qa.testcases;
 import com.mystore.qa.basetest.BaseTest;
 import com.mystore.qa.pages.ContactUsPage;
 import com.mystore.qa.pages.LoginPage;
-import com.mystore.qa.pages.MyAccountPage;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.ConfigReader;
@@ -16,7 +15,6 @@ import java.util.*;
 public class MyStorePageTest extends BaseTest {
     MyStorePage myStorePage;
     LoginPage loginPage;
-    MyAccountPage myAccountPage;
     ContactUsPage contactUsPage;
     WomenPage womenPage;
 
