@@ -64,5 +64,16 @@ public class MyStorePaymentPage extends BasePage {
             return false;
         }
     }
+
+    private WebElement getBackToOrders() {
+        By getBackToOrdersLocator = By.cssSelector("a[class='button-exclusive btn btn-default']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getBackToOrdersLocator));
+        return driver.findElement(getBackToOrdersLocator);
+    }
+
+    public OrderHistoryPage validateBackToOrders() {
+        getBackToOrders().click();
+        return new OrderHistoryPage(driver);
+    }
 }
 

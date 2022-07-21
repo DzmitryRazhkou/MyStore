@@ -15,6 +15,7 @@ public class MyStorePaymentPageTest extends BaseTest {
     SearchPage searchPage;
     OrderPage orderPage;
     MyStorePaymentPage myStorePaymentPage;
+    OrderHistoryPage orderHistoryPage;
 
     @Test
     public void validateCheckPaymentBreadcrumbTest() {
@@ -87,5 +88,30 @@ public class MyStorePaymentPageTest extends BaseTest {
         myStorePaymentPage = orderPage.selectPaymentMethod();
         myStorePaymentPage.validatePaymentInformation();
         Assert.assertTrue(myStorePaymentPage.validateConfirmOrderComplete());
+    }
+
+    @Test
+    public void validateBackToOrdersTest() {
+        faker = new Faker();
+        String deliveryInstruction = faker.currency().name();
+        int index = Math.max(1, 3);
+
+        String productType = prop.getProperty("productType");
+
+        String quantity = prop.getProperty("quantity");
+        String size = prop.getProperty("size");
+
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        searchPage.doClickOnProduct();
+        searchPage.doAddToCart(quantity, size);
+        orderPage = searchPage.proceedToOrderPage();
+        orderPage.proceedThruOrderPage(deliveryInstruction, index);
+        myStorePaymentPage = orderPage.selectPaymentMethod();
+        myStorePaymentPage.validatePaymentInformation();
+        orderHistoryPage = myStorePaymentPage.validateBackToOrders();
+        Assert.assertTrue(orderHistoryPage.getOrderHistoryBreadCrumb());
     }
 }
