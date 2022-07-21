@@ -67,6 +67,7 @@ public class OrderPage extends BasePage {
     }
 
     public double price() {
+        log.info("Validate product prices");
         double actTotal = getTotalPrice() + getTotalShipping();
         System.out.println(" =====> Actual total price: " + actTotal + "$ <=====");
         return actTotal;
@@ -125,17 +126,25 @@ public class OrderPage extends BasePage {
 
 
     public void proceedThruOrderPage(String deliveryInstruction, int index) {
+        log.info("User clicks on the proceed to check out.");
         getProceedToCheckOutSummary().click();
+        log.info("User selects address from drop down menu.");
         selectDeliveryAddress(index);
+        log.info("User adds a delivery instruction.");
         getTextArea().clear();
         getTextArea().sendKeys(deliveryInstruction);
+        log.info("User clicks on the proceed to check out.");
         getProceedToCheckOutAddress().click();
+        log.info("User clicks on the check box.");
         getCheckBox().click();
+        log.info("User clicks on the proceed to check out.");
         getProceedToCheckOutShipping().click();
     }
 
     public MyStorePaymentPage selectPaymentMethod(){
+        log.info("User selects the payment method.");
         getPaymentMethod().click();
+        log.info("User navigates on the my store payment page.");
         return new MyStorePaymentPage(driver);
     }
 }

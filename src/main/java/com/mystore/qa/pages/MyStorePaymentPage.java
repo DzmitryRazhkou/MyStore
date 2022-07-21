@@ -46,6 +46,7 @@ public class MyStorePaymentPage extends BasePage {
     }
 
     public void validatePaymentInformation() {
+        log.info("User confirms the order details.");
         getIConfirmPayment().click();
     }
 
@@ -72,7 +73,9 @@ public class MyStorePaymentPage extends BasePage {
     }
 
     public OrderHistoryPage validateBackToOrders() {
+        log.info("User clicks on the back to order.");
         getBackToOrders().click();
+        log.info("User navigates on the order history page.");
         return new OrderHistoryPage(driver);
     }
 }
