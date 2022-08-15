@@ -13,6 +13,7 @@ import org.testng.annotations.Listeners;
 import java.util.Properties;
 
 @Listeners(com.mystore.qa.listeners.Listeners.class)
+
 public class BaseTest {
 
     protected ConfigReader cp;
